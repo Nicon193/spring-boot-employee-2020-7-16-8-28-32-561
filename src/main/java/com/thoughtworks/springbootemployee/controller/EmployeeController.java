@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -22,8 +23,11 @@ public class EmployeeController {
         if(page!=null&&pageSize!=null){
             return employees.subList(--page,--pageSize);
         }
+        if (gender!=null){
+           return employees.stream().filter(employee -> employee.getGender()==gender).collect(Collectors.toList());
 
-        
+        }
+
         return employees;
     }
 
