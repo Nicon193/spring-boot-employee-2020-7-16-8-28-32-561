@@ -17,8 +17,8 @@ public class EmployeeController {
 
 
     @GetMapping()
-    public List<Employee> getEmployeeList(@RequestParam(name = "page") int page,
-    @RequestParam(name="pageSize")int pageSize,@RequestParam(name ="gender") String gender) {
+    public List<Employee> getEmployeeList(@RequestParam(name = "page",required = false) Integer page,
+    @RequestParam(name="pageSize",required = false)Integer pageSize,@RequestParam(name ="gender",required = false) String gender) {
         EmployeesInitialization  EmployeesInitialization = new EmployeesInitialization();
         return EmployeesInitialization.retrunEmployees();
     }
