@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeesInitialization {
-    public static List<Employee> employees = new ArrayList<>();
+    public  List<Employee> employees = new ArrayList<>();
 
     public EmployeesInitialization() {
         employees.add(new Employee(0, "Xiaoming", 20, "Male"));
@@ -16,7 +16,7 @@ public class EmployeesInitialization {
         employees.add(new Employee(4, "Xiaoxia", 15, "Female"));
     }
 
-    public static List<Employee> retrunEmployees(){
+    public  List<Employee> retrunEmployees(){
         return  employees;
     }
 

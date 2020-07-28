@@ -21,14 +21,15 @@ public class EmployeeController {
 
     @GetMapping()
     public List<Employee> getEmployeeList() {
-
+        EmployeesInitialization  EmployeesInitialization = new EmployeesInitialization();
         return EmployeesInitialization.retrunEmployees();
     }
 
     @GetMapping(path = "/{employeeId}")
     public Employee getEmployeeByNumber(@PathVariable String employeeId) {
+        EmployeesInitialization  EmployeesInitialization = new EmployeesInitialization();
         List<Employee> employees =EmployeesInitialization.retrunEmployees();
-         return employees.get(Integer.parseInt(employeeId));
+        return employees.get(Integer.parseInt(employeeId));
 
     }
 
