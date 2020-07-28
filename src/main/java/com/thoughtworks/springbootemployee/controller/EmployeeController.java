@@ -71,4 +71,17 @@ public class EmployeeController {
 
     }
 
+    @DeleteMapping (path = "/{employeeId}")
+    public String deleteEmployeeById(@PathVariable Integer employeeId) {
+        EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
+        List<Employee> employees = EmployeesInitialization.retrunEmployees();
+        Employee Employee= employees.stream().filter(employee -> employee.getId() == Integer.parseInt(String.valueOf(employeeId))).findFirst().orElse(null);
+        if(Employee==null){
+            return "Delete failed";
+        }
+       employees.remove(Employee);
+        return "Delete successfully. ";
+
+    }
+
 }
