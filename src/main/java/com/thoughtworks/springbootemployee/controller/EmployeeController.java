@@ -20,11 +20,11 @@ public class EmployeeController {
                                           @RequestParam(name = "pageSize", required = false) Integer pageSize, @RequestParam(name = "gender", required = false) String gender) {
         EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
         List<Employee> employees = EmployeesInitialization.retrunEmployees();
-        if(page!=null&&pageSize!=null){
-            return employees.subList(--page,--pageSize);
+        if (page != null && pageSize != null) {
+            return employees.subList(--page, --pageSize);
         }
-        if (gender!=null){
-           return employees.stream().filter(employee -> employee.getGender().equalsIgnoreCase(gender)).collect(Collectors.toList());
+        if (gender != null) {
+            return employees.stream().filter(employee -> employee.getGender().equalsIgnoreCase(gender)).collect(Collectors.toList());
 
         }
 
@@ -38,7 +38,21 @@ public class EmployeeController {
         List<Employee> employees = EmployeesInitialization.retrunEmployees();
         return employees.stream().filter(employee -> employee.getId() == Integer.parseInt(employeeId)).findFirst().orElse(null);
 
+    }
 
+    @PostMapping()
+    public String addEmployee(@RequestParam(name = "id", required = false) Integer id, @RequestParam(name = "name", required = false) String name,
+                            @RequestParam(name = "age", required = false) Integer age, @RequestParam(name = "gender", required = false) String gender) {
+        Employee employee =new Employee(id,name,age,gender);
+
+        EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
+        List<Employee> employees = EmployeesInitialization.retrunEmployees();
+
+        if(employees.add(employee)){
+            return "Added successfully";
+        }
+
+        return "Add failed";
     }
 
 
