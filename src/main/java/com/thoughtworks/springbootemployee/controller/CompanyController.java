@@ -34,4 +34,14 @@ public class CompanyController {
         }
         return null;
     }
+    @GetMapping(path = "/{Id}/employees")
+    public List<Employee> getCompanyEmployeessByNumber(@PathVariable int Id) {
+
+        ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
+        List<Company> companies =conpaniesInitialization.returnCompanies();
+        if(Id>=0&&Id<companies.size()){
+            return  companies.get(Id).getEmployees();
+        }
+        return null;
+    }
 }
