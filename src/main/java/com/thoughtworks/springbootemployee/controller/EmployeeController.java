@@ -24,9 +24,9 @@ public class EmployeeController {
         return employees;
     }
 
-    @GetMapping(path = "/{number}")
-    public Employee getEmployeeByNumber(@PathVariable String number) {
-         return employees.get(Integer.parseInt(number));
+    @GetMapping(path = "/{employeeId}")
+    public Employee getEmployeeByNumber(@PathVariable String employeeId) {
+         return employees.get(Integer.parseInt(employeeId));
 
     }
 
