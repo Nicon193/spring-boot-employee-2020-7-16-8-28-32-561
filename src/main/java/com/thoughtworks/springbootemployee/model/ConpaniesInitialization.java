@@ -13,6 +13,7 @@ public List<Company> companies =new ArrayList<>();
         List<Employee> employees = EmployeesInitialization.retrunEmployees();
         companies.add(new Company("libaba","5",employees));
         companies.add(new Company("paidu","5",employees));
+        companies.add(new Company("tencet","5",employees));
     }
 
     public List<Company> returnCompanies(){

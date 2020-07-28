@@ -5,24 +5,16 @@ import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.model.ConpaniesInitialization;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.model.EmployeesInitialization;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/companies")
 public class CompanyController {
 
-    @GetMapping()
-    public List<Company> getCompanyList(){
-        ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
-        List<Company> companies =conpaniesInitialization.returnCompanies();
-        return companies;
-    }
 
     @GetMapping(path = "/{Id}")
     public Company getCompanyByNumber(@PathVariable int Id) {
@@ -43,5 +35,17 @@ public class CompanyController {
             return  companies.get(Id).getEmployees();
         }
         return null;
+    }
+
+    @GetMapping()
+    public List<Company> getCompanyList(@RequestParam(name = "page", required = false) Integer page,
+                                          @RequestParam(name = "pageSize", required = false) Integer pageSize) {
+        ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
+        List<Company> companies =conpaniesInitialization.returnCompanies();
+        if (page != null && pageSize != null) {
+            return companies.subList(--page, --pageSize);
+        }
+
+        return companies;
     }
 }
