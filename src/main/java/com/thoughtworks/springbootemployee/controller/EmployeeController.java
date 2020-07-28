@@ -18,11 +18,13 @@ public class EmployeeController {
     public List<Employee> getEmployeeList(@RequestParam(name = "page", required = false) Integer page,
                                           @RequestParam(name = "pageSize", required = false) Integer pageSize, @RequestParam(name = "gender", required = false) String gender) {
         EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
-
+        List<Employee> employees = EmployeesInitialization.retrunEmployees();
         if(page!=null&&pageSize!=null){
-            return EmployeesInitialization.retrunEmployees().subList(--page,--pageSize);
+            return employees.subList(--page,--pageSize);
         }
-        return EmployeesInitialization.retrunEmployees();
+
+        
+        return employees;
     }
 
     @GetMapping(path = "/{employeeId}")
