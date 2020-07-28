@@ -7,6 +7,12 @@ public class Company  {
     private String employeesNumber;
     private List<Employee> employees;
 
+    public Company(String companyName, String employeesNumber, List<Employee> employees) {
+        this.companyName = companyName;
+        this.employeesNumber = employeesNumber;
+        this.employees = employees;
+    }
+
     public String getCompanyName() {
         return companyName;
     }

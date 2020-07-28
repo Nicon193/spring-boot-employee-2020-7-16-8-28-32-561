@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.controller;
 
 
 import com.thoughtworks.springbootemployee.model.Company;
+import com.thoughtworks.springbootemployee.model.ConpaniesInitialization;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,11 +16,8 @@ public class CompanyController {
 
     @GetMapping()
     public List<Company> getCompanyList(){
-        List<Company> companies =new ArrayList<>();
-        companies.add(new Company());
-        companies.add(new Company());
-        companies.add(new Company());
-
+        ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
+        List<Company> companies =conpaniesInitialization.returnCompanies();
         return companies;
     }
 }
