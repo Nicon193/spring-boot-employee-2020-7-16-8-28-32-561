@@ -27,9 +27,12 @@ public class EmployeeController {
 
     @GetMapping(path = "/{employeeId}")
     public Employee getEmployeeByNumber(@PathVariable String employeeId) {
+
         EmployeesInitialization  EmployeesInitialization = new EmployeesInitialization();
         List<Employee> employees =EmployeesInitialization.retrunEmployees();
-        return employees.get(Integer.parseInt(employeeId));
+        return employees.stream().filter(employee -> employee.getId()==Integer.parseInt(employeeId)).findFirst().orElse(null);
+
+
 
     }
 
