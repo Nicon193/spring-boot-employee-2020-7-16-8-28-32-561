@@ -51,9 +51,24 @@ public class EmployeeController {
         if(employees.add(employee)){
             return "Added successfully";
         }
-
         return "Add failed";
     }
 
+    @PutMapping(path = "/{employeeId}")
+    public String updateEmployeeById(@PathVariable Integer employeeId, @RequestParam(name = "name", required = false) String name,
+                                     @RequestParam(name = "age", required = false) Integer age, @RequestParam(name = "gender", required = false) String gender) {
+        EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
+        List<Employee> employees = EmployeesInitialization.retrunEmployees();
+        Employee Employee= employees.stream().filter(employee -> employee.getId() == Integer.parseInt(String.valueOf(employeeId))).findFirst().orElse(null);
+        if(Employee==null){
+            return "Update failed";
+        }
+        Employee.setName(name);
+        Employee.setAge(age);
+        Employee.setGender(gender);
+        return "Update successfully. "+"New No."+Employee.getId()+" Employee name is : "+ Employee.getName()+
+                ", age is : "+Employee.getAge()+", gender is : "+Employee.getGender();
+
+    }
 
 }
