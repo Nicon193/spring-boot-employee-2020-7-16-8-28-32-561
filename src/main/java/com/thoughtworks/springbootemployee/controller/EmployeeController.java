@@ -24,7 +24,7 @@ public class EmployeeController {
             return employees.subList(--page,--pageSize);
         }
         if (gender!=null){
-           return employees.stream().filter(employee -> employee.getGender()==gender).collect(Collectors.toList());
+           return employees.stream().filter(employee -> employee.getGender().equalsIgnoreCase(gender)).collect(Collectors.toList());
 
         }
 
