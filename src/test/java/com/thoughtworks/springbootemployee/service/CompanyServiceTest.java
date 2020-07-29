@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -36,9 +37,9 @@ public class CompanyServiceTest {
         CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
         CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
 
-        given(mockedCompanyRespository.findCompanyByID()).willReturn(new Company(1, "alibaba", "50", null));
+        given(mockedCompanyRespository.findCompanyByID(1)).willReturn(new Company(1, "alibaba", "50", null));
         //when
-        Company company =CompanyService.findCompanyByID();
+        Company company =CompanyService.findCompanyByID(1);
         //then
 
         assertNotNull(company);
@@ -103,5 +104,21 @@ public class CompanyServiceTest {
         //then
 
         assertNotNull(company);
+    }
+
+    @Test
+    void should_return_update_compeny_when_update_company_given_company() {
+        //given
+        CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
+        CompanyService companyService = new CompanyService(mockedCompanyRespository);
+        given(mockedCompanyRespository.findCompanyByID(1)).willReturn(new Company(1, "OOCL", "0", new ArrayList<>()));
+
+        //when
+        Company updateCompany = companyService.update(5, new Company(1, "OOIL", "0", new ArrayList<>()));
+
+
+        //then
+        assertEquals("OOIL",updateCompany.getCompanyName());
+
     }
 }

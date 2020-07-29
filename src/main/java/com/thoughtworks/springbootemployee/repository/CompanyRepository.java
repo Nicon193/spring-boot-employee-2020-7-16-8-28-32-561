@@ -12,7 +12,7 @@ public class CompanyRepository {
     }
 
 
-    public Company findCompanyByID() {
+    public Company findCompanyByID(int id) {
         return null;
     }
 

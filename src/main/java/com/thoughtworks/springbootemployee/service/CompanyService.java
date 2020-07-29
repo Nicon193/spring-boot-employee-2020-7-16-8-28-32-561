@@ -17,8 +17,8 @@ public class CompanyService {
         return  companyRespository.findAll();
     }
 
-    public Company findCompanyByID() {
-        return this.companyRespository.findCompanyByID();
+    public Company findCompanyByID(int id) {
+        return this.companyRespository.findCompanyByID(id);
     }
 
     public List<Employee> findCompanyEmployeesByID(int companyID) {
@@ -35,5 +35,9 @@ public class CompanyService {
 
     public Company deleteCompany(int companyID) {
         return companyRespository.deleteCompany(companyID);
+    }
+
+    public Company update(int id, Company oocl) {
+        return null;
     }
 }
