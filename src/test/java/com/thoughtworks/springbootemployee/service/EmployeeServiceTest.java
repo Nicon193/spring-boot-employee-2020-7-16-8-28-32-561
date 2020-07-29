@@ -4,7 +4,11 @@ import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -31,10 +35,17 @@ public class EmployeeServiceTest {
     void should_all_employee_information_when_find_all_employee_information_given_null() {
         //given
 
-
         //when
+        EmployeeRepository mockedEmployeeRespository = mock(EmployeeRepository.class);
+        EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList.add(new Employee(3, "ffff", 18, "male"));
+        employeeList.add(new Employee(5, "ffff", 18, "male"));
+        employeeList.add(new Employee(4, "ffff", 18, "male"));
+        given(mockedEmployeeRespository.findAll()).willReturn(employeeList);
 
         //then
 
+        assertNotNull(employeeService.findAll());
     }
 }
