@@ -3,7 +3,10 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.model.Employee;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class EmployeeServiceTest {
     @Test
@@ -20,6 +23,19 @@ public class EmployeeServiceTest {
         assertEquals("test",updateEmployee.getName());
         assertEquals(18,updateEmployee.getAge());
         assertEquals("male",updateEmployee.getGender());
+
+    }
+
+    @Test
+    void should_all_employee_information_when_find_all_employee_information_given_null() {
+        //given
+        EmployeeService employeeService = new EmployeeService();
+
+        //when
+        List<Employee> employees = employeeService.findAll();
+
+        //then
+        assertNotNull(employees);
 
     }
 }
