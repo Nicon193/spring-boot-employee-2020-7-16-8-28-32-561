@@ -37,11 +37,13 @@ public class CompanyService {
         return companyRespository.deleteCompany(companyID);
     }
 
-    public Company update(int id, Company oocl) {
-        Company updateCompany = this.companyRespository.findCompanyByID(id);
-        updateCompany.setCompanyName(oocl.getCompanyName());
-        updateCompany.setEmployees(oocl.getEmployees());
-        updateCompany.setEmployeesNumber(oocl.getEmployeesNumber());
+    public Company update(int id, Company company) {
+        Company updateCompany = this.companyRespository.findById(id).orElse(null);
+        if(updateCompany!=null&&company!=null) {
+            updateCompany.setCompanyName(company.getCompanyName());
+            updateCompany.setEmployees(company.getEmployees());
+            updateCompany.setEmployeesNumber(company.getEmployeesNumber());
+        }
         return updateCompany;
     }
 }
