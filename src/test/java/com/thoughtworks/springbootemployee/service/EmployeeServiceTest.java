@@ -89,7 +89,7 @@ public class EmployeeServiceTest {
         employeeList.add(new Employee(3, "ffff", 18, "male"));
         employeeList.add(new Employee(4, "ffff", 18, "male"));
         employeeList.add(new Employee(5, "ffff", 18, "male"));
-        given(mockedEmployeeRespository.getRangeOfEmployees(3, 3)).willReturn(employeeList);
+        given(employeeService.getRangeOfEmployees(3, 3)).willReturn(employeeList);
 
         //when
         List<Employee> employees = employeeService.getRangeOfEmployees(3, 3);
@@ -105,7 +105,7 @@ public class EmployeeServiceTest {
         EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
         Employee employee =new Employee(3, "ffff", 18, "male");
 
-        given(mockedEmployeeRespository.addEmployee(employee)).willReturn(employee);
+        given(employeeService.addEmployee(employee)).willReturn(employee);
 
         //when
         Employee addedEmployee = employeeService.addEmployee(employee);
@@ -121,7 +121,7 @@ public class EmployeeServiceTest {
         EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
         Employee employee =new Employee(3, "ffff", 18, "male");
 
-        given(mockedEmployeeRespository.deleteEmployee(employee)).willReturn(employee);
+        given(employeeService.deleteEmployee(employee)).willReturn(employee);
 
         //when
         Employee deletedEmployee = employeeService.deleteEmployee(employee);
