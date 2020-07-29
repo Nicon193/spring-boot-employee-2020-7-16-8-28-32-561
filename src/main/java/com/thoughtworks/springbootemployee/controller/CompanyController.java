@@ -60,20 +60,21 @@ public class CompanyController {
     }
 
     @PutMapping(path = "/{Id}")
-    public String updateCompany(
+    public Company updateCompany(
             @PathVariable int Id,
             @RequestParam(name = "companyName", required = false) String companyName,
             @RequestParam(name = "employeesNumber", required = false) String employeesNumber,
             @RequestParam(name = "employees", required = false) List<Employee> employees
 
     ) {
+        Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
+        if(company!=null){
 
-        if (Id>=0&&Id<companies.size()){
-            companies.get(Id).updateCompany(companyName,employeesNumber,employees);
-            return "Update successfully";
+            company.updateCompany(companyName,employeesNumber,employees);
+            return company;
         }
 
-        return "Update failed";
+        return company;
     }
 
     @DeleteMapping(path = "/{Id}")
