@@ -14,13 +14,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/companies")
 public class CompanyController {
-
+    ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
+    List<Company> companies = conpaniesInitialization.returnCompanies();
 
     @GetMapping(path = "/{Id}")
     public Company getCompanyByNumber(@PathVariable int Id) {
 
-        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
-        List<Company> companies = conpaniesInitialization.returnCompanies();
+
         if (Id >= 0 && Id < companies.size()) {
             return companies.get(Id);
         }
@@ -30,8 +30,6 @@ public class CompanyController {
     @GetMapping(path = "/{Id}/employees")
     public List<Employee> getCompanyEmployeessByNumber(@PathVariable int Id) {
 
-        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
-        List<Company> companies = conpaniesInitialization.returnCompanies();
         if (Id >= 0 && Id < companies.size()) {
             return companies.get(Id).getEmployees();
         }
@@ -41,8 +39,7 @@ public class CompanyController {
     @GetMapping()
     public List<Company> getCompanyList(@RequestParam(name = "page", required = false) Integer page,
                                         @RequestParam(name = "pageSize", required = false) Integer pageSize) {
-        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
-        List<Company> companies = conpaniesInitialization.returnCompanies();
+
         if (page != null && pageSize != null) {
             return companies.subList(--page, --pageSize);
         }
@@ -52,8 +49,7 @@ public class CompanyController {
     @ResponseBody
     @PostMapping
     public String addCompany(@RequestBody Company company) {
-        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
-        List<Company> companies = conpaniesInitialization.returnCompanies();
+
         if (company != null) {
             companies.add(company);
             return "Added successfully";
@@ -69,8 +65,7 @@ public class CompanyController {
             @RequestParam(name = "employees", required = false) List<Employee> employees
 
     ) {
-        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
-        List<Company> companies = conpaniesInitialization.returnCompanies();
+
         if (Id>=0&&Id<companies.size()){
             companies.get(Id).updateCompany(companyName,employeesNumber,employees);
             return "Update successfully";
@@ -81,8 +76,6 @@ public class CompanyController {
 
     @DeleteMapping(path = "/{Id}")
     public String deleteCompany(   @PathVariable int Id){
-        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
-        List<Company> companies = conpaniesInitialization.returnCompanies();
         if (Id>=0&&Id<companies.size()){
             companies.remove(Id);
             return "delete successfully";
