@@ -42,7 +42,7 @@ public class EmployeeService {
         return employeeRepository.addEmployee(employee);
     }
 
-    public Employee deleteEmployee(Employee employee) {
-        return this.employeeRepository.deleteEmployee(employee);
+    public void deleteEmployee(Employee employee) {
+         this.employeeRepository.delete(employee);
     }
 }
