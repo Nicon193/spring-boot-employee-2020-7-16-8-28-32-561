@@ -18,4 +18,8 @@ public class EmployeeRepository {
     public List<Employee> findEmployeeByGender(String gender) {
         return  null;
     }
+
+    public List<Employee> getRangeOfEmployees(int page, int pageSize) {
+        return null;
+    }
 }

@@ -79,4 +79,22 @@ public class EmployeeServiceTest {
         assertNotNull(employees);
 
     }
+
+    @Test
+    void should_range_of_employee_when_get_range_of_employees_given_page_and_page_size() {
+        //given
+        EmployeeRepository mockedEmployeeRespository = mock(EmployeeRepository.class);
+        EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList.add(new Employee(3, "ffff", 18, "male"));
+        employeeList.add(new Employee(4, "ffff", 18, "male"));
+        employeeList.add(new Employee(5, "ffff", 18, "male"));
+        given(mockedEmployeeRespository.getRangeOfEmployees(3, 3)).willReturn(employeeList);
+
+        //when
+        List<Employee> employees = employeeService.getRangeOfEmployees(3, 3);
+
+        //then
+        assertEquals(employeeList, employees);
+    }
 }
