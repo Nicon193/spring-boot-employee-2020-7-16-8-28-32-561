@@ -26,4 +26,8 @@ public class EmployeeRepository {
     public Employee addEmployee(Employee employee) {
         return null;
     }
+
+    public Employee deleteEmployee(Employee employee) {
+        return null;
+    }
 }
