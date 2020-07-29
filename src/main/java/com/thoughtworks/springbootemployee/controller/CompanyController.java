@@ -15,6 +15,17 @@ public class CompanyController {
     ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
     List<Company> companies = conpaniesInitialization.returnCompanies();
 
+
+    @GetMapping
+    public List<Company> getCompanyList(@RequestParam(name = "page", required = false) Integer page,
+                                        @RequestParam(name = "pageSize", required = false) Integer pageSize) {
+
+        if (page != null && pageSize != null) {
+            return companies.subList((page-1) * pageSize, page * pageSize - 1);
+        }
+        return companies;
+    }
+
     @GetMapping(path = "/{Id}")
     public Company getCompanyByNumber(@PathVariable int Id) {
 
@@ -33,17 +44,7 @@ public class CompanyController {
         return null;
     }
 
-    @GetMapping()
-    public List<Company> getCompanyList(@RequestParam(name = "page", required = false) Integer page,
-                                        @RequestParam(name = "pageSize", required = false) Integer pageSize) {
 
-        if (page != null && pageSize != null) {
-            return companies.subList((page-1) * pageSize, page * pageSize - 1);
-        }
-        return companies;
-    }
-
-    @ResponseBody
     @PostMapping
     public Company addCompany(@RequestBody Company company) {
 
