@@ -29,8 +29,8 @@ public class CompanyService {
         return this.companyRespository.findRangeOfCompany(page, pageSize);
     }
 
-    public Company addCompany() {
-        return  companyRespository.addCompany();
+    public Company addCompany(Company company) {
+        return  companyRespository.save(company);
     }
 
     public void deleteCompany(int companyID) {
