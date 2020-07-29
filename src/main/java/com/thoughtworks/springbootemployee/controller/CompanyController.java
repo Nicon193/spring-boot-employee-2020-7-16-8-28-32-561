@@ -49,7 +49,7 @@ public class CompanyController {
     }
 
     @ResponseBody
-    @PostMapping()
+    @PostMapping
     public String addCompany( @RequestBody Company company){
         ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
         List<Company> companies =conpaniesInitialization.returnCompanies();
