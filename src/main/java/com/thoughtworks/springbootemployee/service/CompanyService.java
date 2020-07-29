@@ -3,6 +3,7 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class CompanyService {
     }
 
     public List<Company> findRangeOfCompany(int page, int pageSize) {
-        return this.companyRespository.findRangeOfCompany(page, pageSize);
+        return this.companyRespository.findAll(PageRequest.of(page,pageSize)).toList();
     }
 
     public Company addCompany(Company company) {
