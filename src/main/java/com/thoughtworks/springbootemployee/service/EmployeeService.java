@@ -15,11 +15,15 @@ public class EmployeeService {
 
     }
 
-    public Employee update(int employeeId, Employee newEmployee) {
-        Employee updateEmployee = employeeRepository.findEmployeeByID(employeeId);
-        updateEmployee.setAge(newEmployee.getAge());
-        updateEmployee.setGender(newEmployee.getGender());
-        updateEmployee.setName(newEmployee.getName());
+    public Employee updateEmployeeById(int employeeId, Employee newEmployee) {
+        Employee updateEmployee = employeeRepository.findById(employeeId).orElse(null);
+        if (updateEmployee!=null&&newEmployee!=null){
+
+            updateEmployee.setAge(newEmployee.getAge());
+            updateEmployee.setGender(newEmployee.getGender());
+            updateEmployee.setName(newEmployee.getName());
+
+        }
         return updateEmployee;
     }
 
@@ -28,7 +32,7 @@ public class EmployeeService {
     }
 
     public Employee findEmployeeByID(int id) {
-        return employeeRepository.findEmployeeByID(id);
+        return employeeRepository.getOne(id);
     }
 
     public List<Employee> findEmployeeByGender(String gender) {
