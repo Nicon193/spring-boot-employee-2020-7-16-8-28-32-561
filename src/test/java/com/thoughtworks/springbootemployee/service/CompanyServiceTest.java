@@ -26,4 +26,19 @@ public class CompanyServiceTest {
 
         assertNotNull(companyList);
     }
+
+    @Test
+    void should_return_certain_company_when_find_company_by_id_given_company_id() {
+        //given
+        CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
+        CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
+
+        given(mockedCompanyRespository.findCompanyByID()).willReturn(new Company(1, "alibaba", "50", null));
+        //when
+        Company company =CompanyService.findCompanyByID();
+        //then
+
+        assertNotNull(company);
+
+    }
 }

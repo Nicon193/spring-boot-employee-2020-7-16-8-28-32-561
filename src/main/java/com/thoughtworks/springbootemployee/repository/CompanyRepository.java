@@ -11,4 +11,7 @@ public class CompanyRepository {
     }
 
 
+    public Company findCompanyByID() {
+        return null;
+    }
 }
