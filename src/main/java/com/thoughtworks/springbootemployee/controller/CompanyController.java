@@ -50,13 +50,13 @@ public class CompanyController {
 
     @ResponseBody
     @PostMapping
-    public String addCompany(@RequestBody Company company) {
+    public Company addCompany(@RequestBody Company company) {
 
         if (company != null) {
             companies.add(company);
-            return "Added successfully";
+            return company;
         }
-        return "Add failed";
+        return company;
     }
 
     @PutMapping(path = "/{Id}")
