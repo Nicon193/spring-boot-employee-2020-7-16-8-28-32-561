@@ -114,19 +114,5 @@ public class EmployeeServiceTest {
         assertEquals(employee, addedEmployee);
     }
 
-    @Test
-    void should_return_employee_when_delete_employee_given_employee() {
-        //given
-        EmployeeRepository mockedEmployeeRespository = mock(EmployeeRepository.class);
-        EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
-        Employee employee =new Employee(3, "ffff", 18, "male");
 
-        given(employeeService.deleteEmployee(employee)).willReturn(employee);
-
-        //when
-        Employee deletedEmployee = employeeService.deleteEmployee(employee);
-
-        //then
-        assertEquals(employee, deletedEmployee);
-    }
 }
