@@ -1,9 +1,11 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.model.Company;
+import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,4 +43,19 @@ public class CompanyServiceTest {
         assertNotNull(company);
 
     }
+
+    @Test
+    void should_return_company_employee_list_when_find_company_employee_list_by_id_given_company_id() {
+        //given
+        CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
+        CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
+
+        given(mockedCompanyRespository.findCompanyEmployeesByID(2)).willReturn(Arrays.asList(new Employee(1, "alibaba", 50, "female") ,new Employee(2, "tengxun", 40, "male")));
+        //when
+        List<Employee> employees =CompanyService.findCompanyEmployeesByID(2);
+        //then
+
+        assertNotNull(employees);
+    }
+
 }

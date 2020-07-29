@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.model.Company;
+import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 
 import java.util.List;
@@ -18,5 +19,9 @@ public class CompanyService {
 
     public Company findCompanyByID() {
         return this.companyRespository.findCompanyByID();
+    }
+
+    public List<Employee> findCompanyEmployeesByID(int companyID) {
+        return null;
     }
 }
