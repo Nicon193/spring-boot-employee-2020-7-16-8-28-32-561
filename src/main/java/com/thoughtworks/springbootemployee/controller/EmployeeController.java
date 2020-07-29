@@ -20,7 +20,7 @@ public class EmployeeController {
                                           @RequestParam(name = "pageSize", required = false) Integer pageSize, @RequestParam(name = "gender", required = false) String gender) {
 
         if (page != null && pageSize != null) {
-            return employees.subList(--page * pageSize, page * pageSize - 1);
+            return employees.subList((page-1) * pageSize, page * pageSize - 1);
         }
         if (gender != null) {
             return employees.stream().filter(employee -> employee.getGender().equalsIgnoreCase(gender)).collect(Collectors.toList());
