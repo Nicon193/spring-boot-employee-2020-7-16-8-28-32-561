@@ -42,7 +42,6 @@ public class CompanyServiceTest {
         //then
 
         assertNotNull(company);
-
     }
 
     @Test
@@ -76,6 +75,19 @@ public class CompanyServiceTest {
 
         //then
         assertNotNull(companies);
+    }
 
+    @Test
+    void should_return_company_when_add_company_given_company() {
+        //given
+        CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
+        CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
+
+        given(mockedCompanyRespository.addCompany()).willReturn(new Company(1, "alibaba", "50", null));
+        //when
+        Company company =CompanyService.addCompany();
+        //then
+
+        assertNotNull(company);
     }
 }

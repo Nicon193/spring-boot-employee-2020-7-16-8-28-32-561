@@ -28,4 +28,8 @@ public class CompanyService {
     public List<Company> findRangeOfCompany(int page, int pageSize) {
         return this.companyRespository.findRangeOfCompany(page, pageSize);
     }
+
+    public Company addCompany() {
+        return  null;
+    }
 }

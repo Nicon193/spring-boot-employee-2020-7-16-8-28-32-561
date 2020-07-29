@@ -24,4 +24,7 @@ public class CompanyRepository {
         return null;
     }
 
+    public Company addCompany() {
+        return  null;
+    }
 }
