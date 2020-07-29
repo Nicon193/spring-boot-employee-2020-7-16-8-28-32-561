@@ -38,6 +38,10 @@ public class CompanyService {
     }
 
     public Company update(int id, Company oocl) {
-        return null;
+        Company updateCompany = this.companyRespository.findCompanyByID(id);
+        updateCompany.setCompanyName(oocl.getCompanyName());
+        updateCompany.setEmployees(oocl.getEmployees());
+        updateCompany.setEmployeesNumber(oocl.getEmployeesNumber());
+        return updateCompany;
     }
 }

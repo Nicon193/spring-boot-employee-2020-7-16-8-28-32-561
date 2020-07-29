@@ -109,12 +109,12 @@ public class CompanyServiceTest {
     @Test
     void should_return_update_compeny_when_update_company_given_company() {
         //given
-        CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
-        CompanyService companyService = new CompanyService(mockedCompanyRespository);
-        given(mockedCompanyRespository.findCompanyByID(1)).willReturn(new Company(1, "OOCL", "0", new ArrayList<>()));
+        CompanyRepository mockedCompanyRepository = mock(CompanyRepository.class);
+        CompanyService companyService = new CompanyService(mockedCompanyRepository);
+        given(mockedCompanyRepository.findCompanyByID(1)).willReturn(new Company(1, "OOCL", "0", new ArrayList<>()));
 
         //when
-        Company updateCompany = companyService.update(5, new Company(1, "OOIL", "0", new ArrayList<>()));
+        Company updateCompany = companyService.update(1, new Company(1, "OOIL", "0", new ArrayList<>()));
 
 
         //then
