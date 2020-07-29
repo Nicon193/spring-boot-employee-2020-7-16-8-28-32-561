@@ -39,6 +39,14 @@ public class Company  {
         this.employees = employees;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void  updateCompany(String companyName, String employeesNumber, List<Employee> employees) {
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;

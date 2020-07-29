@@ -21,8 +21,9 @@ public class CompanyController {
     public Company getCompanyByNumber(@PathVariable int Id) {
 
 
-        if (Id >= 0 && Id < companies.size()) {
-            return companies.get(Id);
+        Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
+        if (company!=null){
+            return company;
         }
         return null;
     }
@@ -30,8 +31,9 @@ public class CompanyController {
     @GetMapping(path = "/{Id}/employees")
     public List<Employee> getCompanyEmployeessByNumber(@PathVariable int Id) {
 
-        if (Id >= 0 && Id < companies.size()) {
-            return companies.get(Id).getEmployees();
+        Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
+        if (company!=null){
+            return company.getEmployees();
         }
         return null;
     }
