@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getRangeOfEmployees(int page, int pageSize) {
-        return this.employeeRepository.getRangeOfEmployees(page, pageSize);
+       return employeeRepository.findAll(PageRequest.of(page,pageSize)).toList();
     }
 
     public Employee addEmployee(Employee employee) {
