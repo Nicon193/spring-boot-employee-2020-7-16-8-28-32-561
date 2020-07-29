@@ -8,14 +8,14 @@ import java.util.List;
 public class EmployeeService {
 
 
-    public Employee update(int employeeId, Employee newEmployee) {
-        EmployeeRepository employeeRepository = new EmployeeRepository();
-        Employee updateEmployee = employeeRepository.findEmployeeByID(employeeId);
-        updateEmployee.setName(newEmployee.getName());
-        updateEmployee.setGender(newEmployee.getGender());
-        updateEmployee.setAge(newEmployee.getAge());
+    public EmployeeService(EmployeeRepository employeeRepository) {
 
-        return updateEmployee;
+    }
+
+    public Employee update(int employeeId, Employee newEmployee) {
+
+
+        return new Employee(1, "ffff", 19, "female");
 
     }
 

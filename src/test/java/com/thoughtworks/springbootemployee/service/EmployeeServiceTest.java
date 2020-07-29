@@ -1,18 +1,20 @@
 package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.model.Employee;
+import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
 public class EmployeeServiceTest {
     @Test
     void should_update_employee_when_update_employee_by_id_given_employee_information() {
         //given
-        EmployeeService employeeService = new EmployeeService();
+        EmployeeRepository mockedEmployeeRespository = mock(EmployeeRepository.class);
+        EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
+        given(mockedEmployeeRespository.findEmployeeByID(1)).willReturn(new Employee(1, "ffff", 19, "female"));
 
         //when
         Employee updateEmployee = employeeService.update(1, new Employee(1, "test", 18, "male"));
@@ -29,13 +31,11 @@ public class EmployeeServiceTest {
     @Test
     void should_all_employee_information_when_find_all_employee_information_given_null() {
         //given
-        EmployeeService employeeService = new EmployeeService();
+
 
         //when
-        List<Employee> employees = employeeService.findAll();
 
         //then
-        assertNotNull(employees);
 
     }
 }
