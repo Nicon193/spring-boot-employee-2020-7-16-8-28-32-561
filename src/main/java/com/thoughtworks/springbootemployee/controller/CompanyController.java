@@ -19,29 +19,30 @@ public class CompanyController {
     @GetMapping(path = "/{Id}")
     public Company getCompanyByNumber(@PathVariable int Id) {
 
-        ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
-        List<Company> companies =conpaniesInitialization.returnCompanies();
-        if(Id>=0&&Id<companies.size()){
-            return  companies.get(Id);
+        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
+        List<Company> companies = conpaniesInitialization.returnCompanies();
+        if (Id >= 0 && Id < companies.size()) {
+            return companies.get(Id);
         }
         return null;
     }
+
     @GetMapping(path = "/{Id}/employees")
     public List<Employee> getCompanyEmployeessByNumber(@PathVariable int Id) {
 
-        ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
-        List<Company> companies =conpaniesInitialization.returnCompanies();
-        if(Id>=0&&Id<companies.size()){
-            return  companies.get(Id).getEmployees();
+        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
+        List<Company> companies = conpaniesInitialization.returnCompanies();
+        if (Id >= 0 && Id < companies.size()) {
+            return companies.get(Id).getEmployees();
         }
         return null;
     }
 
     @GetMapping()
     public List<Company> getCompanyList(@RequestParam(name = "page", required = false) Integer page,
-                                          @RequestParam(name = "pageSize", required = false) Integer pageSize) {
-        ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
-        List<Company> companies =conpaniesInitialization.returnCompanies();
+                                        @RequestParam(name = "pageSize", required = false) Integer pageSize) {
+        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
+        List<Company> companies = conpaniesInitialization.returnCompanies();
         if (page != null && pageSize != null) {
             return companies.subList(--page, --pageSize);
         }
@@ -50,16 +51,32 @@ public class CompanyController {
 
     @ResponseBody
     @PostMapping
-    public String addCompany( @RequestBody Company company){
-        ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
-        List<Company> companies =conpaniesInitialization.returnCompanies();
-        if(company!=null){
+    public String addCompany(@RequestBody Company company) {
+        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
+        List<Company> companies = conpaniesInitialization.returnCompanies();
+        if (company != null) {
             companies.add(company);
             return "Added successfully";
         }
         return "Add failed";
     }
 
+    @PutMapping(path = "/{Id}")
+    public String updateCompany(
+            @PathVariable int Id,
+            @RequestParam(name = "companyName", required = false) String companyName,
+            @RequestParam(name = "employeesNumber", required = false) String employeesNumber,
+            @RequestParam(name = "employees", required = false) List<Employee> employees
 
+    ) {
+        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
+        List<Company> companies = conpaniesInitialization.returnCompanies();
+        if (Id>=0&&Id<companies.size()){
+            companies.get(Id).updateCompany(companyName,employeesNumber,employees);
+            return "Update successfully";
+        }
+
+        return "Update failed";
+    }
 
 }
