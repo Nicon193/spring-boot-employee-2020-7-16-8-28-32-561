@@ -55,7 +55,7 @@ public class EmployeeServiceTest {
         EmployeeRepository mockedEmployeeRespository = mock(EmployeeRepository.class);
         EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
         Employee employee = new Employee(3, "ffff", 18, "male");
-        given(mockedEmployeeRespository.findEmployeeByID(3)).willReturn(employee);
+        given(employeeService.findEmployeeByID(3)).willReturn(employee);
 
         //when
         Employee certainEmployee = employeeService.findEmployeeByID(3);

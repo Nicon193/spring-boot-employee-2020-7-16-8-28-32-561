@@ -83,7 +83,7 @@ public class CompanyServiceTest {
         //given
         CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
         CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
-        Company company =new Company(1, "alibaba", "50", null)
+        Company company =new Company(1, "alibaba", "50", null);
         given(CompanyService.addCompany(company)).willReturn(company);
         //when
         Company addCompany =CompanyService.addCompany(company);
@@ -92,19 +92,6 @@ public class CompanyServiceTest {
         assertNotNull(addCompany);
     }
 
-    @Test
-    void should_return_company_when_delete_company_given_company_id() {
-        //given
-        CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
-        CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
-
-        given(CompanyService.deleteCompany(1)).willReturn(null);
-        //when
-        Company company =CompanyService.deleteCompany(1);
-        //then
-
-        assertNotNull(company);
-    }
 
     @Test
     void should_return_update_compeny_when_update_company_given_company() {
