@@ -45,7 +45,21 @@ public class CompanyController {
         if (page != null && pageSize != null) {
             return companies.subList(--page, --pageSize);
         }
-
         return companies;
     }
+
+    @ResponseBody
+    @PostMapping()
+    public String addCompany( @RequestBody Company company){
+        ConpaniesInitialization conpaniesInitialization =new ConpaniesInitialization();
+        List<Company> companies =conpaniesInitialization.returnCompanies();
+        if(company!=null){
+            companies.add(company);
+            return "Added successfully";
+        }
+        return "Add failed";
+    }
+
+
+
 }
