@@ -19,4 +19,9 @@ public class CompanyRepository {
     public List<Employee> findCompanyEmployeesByID(int companyID) {
         return null;
     }
+
+    public List<Company> findRangeOfCompany(int page, int pageSize) {
+        return null;
+    }
+
 }

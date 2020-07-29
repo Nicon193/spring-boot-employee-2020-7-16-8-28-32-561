@@ -5,6 +5,7 @@ import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -58,4 +59,23 @@ public class CompanyServiceTest {
         assertNotNull(employees);
     }
 
+    @Test
+    void should_return_range_of_company_when_find_range_of_company_given_page_and_page_size() {
+        //given
+        CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
+        CompanyService employeeService = new CompanyService(mockedCompanyRespository);
+        given(mockedCompanyRespository.findRangeOfCompany(3, 3)).willReturn(Arrays.asList(
+                new Company(1, "OOCL", "0", new ArrayList<>()),
+                new Company(1, "OOCL", "0", new ArrayList<>()),
+                new Company(1, "OOCL", "0", new ArrayList<>()),
+                new Company(1, "OOCL", "0", new ArrayList<>())
+        ));
+
+        //when
+        List<Company> companies = employeeService.findRangeOfCompany(3, 3);
+
+        //then
+        assertNotNull(companies);
+
+    }
 }
