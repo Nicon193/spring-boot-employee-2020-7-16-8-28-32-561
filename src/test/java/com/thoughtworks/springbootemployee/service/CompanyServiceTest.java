@@ -90,4 +90,18 @@ public class CompanyServiceTest {
 
         assertNotNull(company);
     }
+
+    @Test
+    void should_return_company_when_delete_company_given_company_id() {
+        //given
+        CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
+        CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
+
+        given(mockedCompanyRespository.deleteCompany(1)).willReturn(new Company(1, "alibaba", "50", null));
+        //when
+        Company company =CompanyService.deleteCompany(1);
+        //then
+
+        assertNotNull(company);
+    }
 }

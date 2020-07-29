@@ -27,4 +27,8 @@ public class CompanyRepository {
     public Company addCompany() {
         return  null;
     }
+
+    public Company deleteCompany(int companyID) {
+        return null;
+    }
 }
