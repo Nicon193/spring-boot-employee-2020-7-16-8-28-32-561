@@ -10,8 +10,8 @@ import java.util.List;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
-    @Query("select * from employ where gender = {gender}")
-    public List<Employee> findEmployeeByGender(String gender);
+    @Query("select e from Employee e where e.gender =?1")
+     List<Employee> findEmployeeByGender( String gender);
 
 
 }
