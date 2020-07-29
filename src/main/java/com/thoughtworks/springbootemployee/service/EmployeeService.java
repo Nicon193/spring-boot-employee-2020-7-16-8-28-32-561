@@ -43,6 +43,6 @@ public class EmployeeService {
     }
 
     public Employee deleteEmployee(Employee employee) {
-        return  null;
+        return this.employeeRepository.deleteEmployee(employee);
     }
 }
