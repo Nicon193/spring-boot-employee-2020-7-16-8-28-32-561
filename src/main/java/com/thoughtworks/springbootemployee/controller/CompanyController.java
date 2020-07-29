@@ -78,13 +78,13 @@ public class CompanyController {
     }
 
     @DeleteMapping(path = "/{Id}")
-    public String deleteCompany(   @PathVariable int Id){
-        if (Id>=0&&Id<companies.size()){
-            companies.remove(Id);
-            return "delete successfully";
+    public Company deleteCompany(   @PathVariable int Id){
+        Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
+        if(company!=null){
+            companies.remove(company);
+            return  company;
         }
-
-        return "delete failed";
+        return company;
     }
 
 }
