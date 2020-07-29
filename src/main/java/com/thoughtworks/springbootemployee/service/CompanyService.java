@@ -19,11 +19,11 @@ public class CompanyService {
     }
 
     public Company findCompanyByID(int id) {
-        return this.companyRespository.findCompanyByID(id);
+        return this.companyRespository.findById(id).orElse(null);
     }
 
     public List<Employee> findCompanyEmployeesByID(int companyID) {
-        return companyRespository.findCompanyEmployeesByID(companyID);
+        return companyRespository.findById(companyID).orElse(null).getEmployees();
     }
 
     public List<Company> findRangeOfCompany(int page, int pageSize) {

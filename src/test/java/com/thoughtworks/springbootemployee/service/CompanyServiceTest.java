@@ -23,7 +23,7 @@ public class CompanyServiceTest {
         CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
         CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
 
-        given(mockedCompanyRespository.findAll()).willReturn(Collections.singletonList(new Company(1, "alibaba", "50", null)));
+        given(CompanyService.findAll()).willReturn(Collections.singletonList(new Company(1, "alibaba", "50", null)));
         //when
         List<Company> companyList =CompanyService.findAll();
         //then
@@ -37,7 +37,7 @@ public class CompanyServiceTest {
         CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
         CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
 
-        given(mockedCompanyRespository.findCompanyByID(1)).willReturn(new Company(1, "alibaba", "50", null));
+        given(CompanyService.findCompanyByID(1)).willReturn(new Company(1, "alibaba", "50", null));
         //when
         Company company =CompanyService.findCompanyByID(1);
         //then
@@ -51,7 +51,7 @@ public class CompanyServiceTest {
         CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
         CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
 
-        given(mockedCompanyRespository.findCompanyEmployeesByID(2)).willReturn(Arrays.asList(new Employee(1, "alibaba", 50, "female") ,new Employee(2, "tengxun", 40, "male")));
+        given(CompanyService.findCompanyEmployeesByID(2)).willReturn(Arrays.asList(new Employee(1, "alibaba", 50, "female") ,new Employee(2, "tengxun", 40, "male")));
         //when
         List<Employee> employees =CompanyService.findCompanyEmployeesByID(2);
         //then
@@ -63,8 +63,8 @@ public class CompanyServiceTest {
     void should_return_range_of_company_when_find_range_of_company_given_page_and_page_size() {
         //given
         CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
-        CompanyService employeeService = new CompanyService(mockedCompanyRespository);
-        given(mockedCompanyRespository.findRangeOfCompany(3, 3)).willReturn(Arrays.asList(
+        CompanyService companyService = new CompanyService(mockedCompanyRespository);
+        given(companyService.findRangeOfCompany(3, 3)).willReturn(Arrays.asList(
                 new Company(1, "OOCL", "0", new ArrayList<>()),
                 new Company(1, "OOCL", "0", new ArrayList<>()),
                 new Company(1, "OOCL", "0", new ArrayList<>()),
@@ -72,7 +72,7 @@ public class CompanyServiceTest {
         ));
 
         //when
-        List<Company> companies = employeeService.findRangeOfCompany(3, 3);
+        List<Company> companies = companyService.findRangeOfCompany(3, 3);
 
         //then
         assertNotNull(companies);
@@ -84,7 +84,7 @@ public class CompanyServiceTest {
         CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
         CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
 
-        given(mockedCompanyRespository.addCompany()).willReturn(new Company(1, "alibaba", "50", null));
+        given(CompanyService.addCompany()).willReturn(new Company(1, "alibaba", "50", null));
         //when
         Company company =CompanyService.addCompany();
         //then
@@ -98,7 +98,7 @@ public class CompanyServiceTest {
         CompanyRepository mockedCompanyRespository = mock(CompanyRepository.class);
         CompanyService CompanyService = new CompanyService(mockedCompanyRespository);
 
-        given(mockedCompanyRespository.deleteCompany(1)).willReturn(new Company(1, "alibaba", "50", null));
+        given(CompanyService.deleteCompany(1)).willReturn(new Company(1, "alibaba", "50", null));
         //when
         Company company =CompanyService.deleteCompany(1);
         //then
