@@ -39,7 +39,7 @@ public class EmployeeService {
     }
 
     public Employee addEmployee(Employee employee) {
-        return employeeRepository.addEmployee(employee);
+        return employeeRepository.save(employee);
     }
 
     public void deleteEmployee(Employee employee) {
