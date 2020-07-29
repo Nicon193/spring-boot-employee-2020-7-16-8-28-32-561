@@ -63,4 +63,20 @@ public class EmployeeServiceTest {
         //then
         assertEquals(employee, certainEmployee);
     }
+
+    @Test
+    void should_certain_gender_employee_when_find_employee_by_gender_given_gender() {
+        //given
+        EmployeeRepository mockedEmployeeRespository = mock(EmployeeRepository.class);
+        EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
+        List<Employee> employeeList = new ArrayList<>();
+        employeeList.add(new Employee(3, "ffff", 18, "male"));
+        employeeList.add(new Employee(5, "ffff", 18, "male"));
+        given(mockedEmployeeRespository.findEmployeeByGender("male")).willReturn(employeeList);
+        //when
+        List<Employee> employees = employeeService.findEmployeeByGender("male");
+        //then
+        assertNotNull(employees);
+
+    }
 }
