@@ -25,4 +25,8 @@ public class EmployeeService {
     public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
+
+    public Employee findEmployeeByID(int i) {
+        return null;
+    }
 }
