@@ -21,15 +21,15 @@ public class CompanyController {
     public Company getCompanyByNumber(@PathVariable int Id) {
 
 
-        Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
-        return company;
+        return companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
+
     }
 
     @GetMapping(path = "/{Id}/employees")
     public List<Employee> getCompanyEmployeessByNumber(@PathVariable int Id) {
 
-        Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
-        if (company!=null){
+        Company company = companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
+        if (company != null) {
             return company.getEmployees();
         }
         return null;
@@ -40,7 +40,7 @@ public class CompanyController {
                                         @RequestParam(name = "pageSize", required = false) Integer pageSize) {
 
         if (page != null && pageSize != null) {
-            return companies.subList(--page*pageSize, page*pageSize-1);
+            return companies.subList(--page * pageSize, page * pageSize - 1);
         }
         return companies;
     }
@@ -64,10 +64,10 @@ public class CompanyController {
             @RequestParam(name = "employees", required = false) List<Employee> employees
 
     ) {
-        Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
-        if(company!=null){
+        Company company = companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
+        if (company != null) {
 
-            company.updateCompany(companyName,employeesNumber,employees);
+            company.updateCompany(companyName, employeesNumber, employees);
             return company;
         }
 
@@ -75,11 +75,11 @@ public class CompanyController {
     }
 
     @DeleteMapping(path = "/{Id}")
-    public Company deleteCompanyById(   @PathVariable int Id){
-        Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
-        if(company!=null){
+    public Company deleteCompanyById(@PathVariable int Id) {
+        Company company = companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
+        if (company != null) {
             companies.remove(company);
-            return  company;
+            return company;
         }
         return company;
     }
