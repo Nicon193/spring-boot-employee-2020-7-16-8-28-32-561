@@ -22,6 +22,6 @@ public class CompanyService {
     }
 
     public List<Employee> findCompanyEmployeesByID(int companyID) {
-        return null;
+        return companyRespository.findCompanyEmployeesByID(companyID);
     }
 }
