@@ -15,7 +15,7 @@ public class EmployeeRepository {
         return null;
     }
 
-    public Object findEmployeeByGender(String gender) {
+    public List<Employee> findEmployeeByGender(String gender) {
         return  null;
     }
 }
