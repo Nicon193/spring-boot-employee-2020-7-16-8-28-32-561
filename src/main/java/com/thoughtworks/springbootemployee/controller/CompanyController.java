@@ -22,10 +22,7 @@ public class CompanyController {
 
 
         Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
-        if (company!=null){
-            return company;
-        }
-        return null;
+        return company;
     }
 
     @GetMapping(path = "/{Id}/employees")
@@ -60,7 +57,7 @@ public class CompanyController {
     }
 
     @PutMapping(path = "/{Id}")
-    public Company updateCompany(
+    public Company updateCompanyById(
             @PathVariable int Id,
             @RequestParam(name = "companyName", required = false) String companyName,
             @RequestParam(name = "employeesNumber", required = false) String employeesNumber,
@@ -78,7 +75,7 @@ public class CompanyController {
     }
 
     @DeleteMapping(path = "/{Id}")
-    public Company deleteCompany(   @PathVariable int Id){
+    public Company deleteCompanyById(   @PathVariable int Id){
         Company company =companies.stream().filter(companie -> companie.getId() == Id).findFirst().orElse(null);
         if(company!=null){
             companies.remove(company);
