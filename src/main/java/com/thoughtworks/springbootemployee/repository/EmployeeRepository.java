@@ -22,4 +22,8 @@ public class EmployeeRepository {
     public List<Employee> getRangeOfEmployees(int page, int pageSize) {
         return null;
     }
+
+    public Employee addEmployee(Employee employee) {
+        return null;
+    }
 }

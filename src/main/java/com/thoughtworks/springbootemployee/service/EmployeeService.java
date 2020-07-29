@@ -37,4 +37,8 @@ public class EmployeeService {
     public List<Employee> getRangeOfEmployees(int page, int pageSize) {
         return this.employeeRepository.getRangeOfEmployees(page, pageSize);
     }
+
+    public Employee addEmployee(Employee employee) {
+        return null;
+    }
 }
