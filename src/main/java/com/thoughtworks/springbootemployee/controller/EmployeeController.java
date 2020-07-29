@@ -21,7 +21,7 @@ public class EmployeeController {
                                           @RequestParam(name = "pageSize", required = false) Integer pageSize, @RequestParam(name = "gender", required = false) String gender) {
 
         if (page != null && pageSize != null) {
-            return employees.subList(--page*pageSize, page*pageSize-1);
+            return employees.subList(--page * pageSize, page * pageSize - 1);
         }
         if (gender != null) {
             return employees.stream().filter(employee -> employee.getGender().equalsIgnoreCase(gender)).collect(Collectors.toList());
@@ -41,8 +41,8 @@ public class EmployeeController {
 
     @PostMapping()
     public Employee addEmployee(@RequestParam(name = "id", required = false) Integer id, @RequestParam(name = "name", required = false) String name,
-                            @RequestParam(name = "age", required = false) Integer age, @RequestParam(name = "gender", required = false) String gender) {
-        Employee employee =new Employee(id,name,age,gender);
+                                @RequestParam(name = "age", required = false) Integer age, @RequestParam(name = "gender", required = false) String gender) {
+        Employee employee = new Employee(id, name, age, gender);
 
 
         employees.add(employee);
@@ -51,10 +51,10 @@ public class EmployeeController {
 
     @PutMapping(path = "/{employeeId}")
     public Employee updateEmployeeById(@PathVariable Integer employeeId, @RequestParam(name = "name", required = false) String name,
-                                     @RequestParam(name = "age", required = false) Integer age, @RequestParam(name = "gender", required = false) String gender) {
+                                       @RequestParam(name = "age", required = false) Integer age, @RequestParam(name = "gender", required = false) String gender) {
 
-        Employee Employee= employees.stream().filter(employee -> employee.getId() == Integer.parseInt(String.valueOf(employeeId))).findFirst().orElse(null);
-        if(Employee==null){
+        Employee Employee = employees.stream().filter(employee -> employee.getId() == Integer.parseInt(String.valueOf(employeeId))).findFirst().orElse(null);
+        if (Employee == null) {
             return null;
         }
         Employee.setName(name);
@@ -64,14 +64,14 @@ public class EmployeeController {
 
     }
 
-    @DeleteMapping (path = "/{employeeId}")
+    @DeleteMapping(path = "/{employeeId}")
     public Employee deleteEmployeeById(@PathVariable Integer employeeId) {
 
-        Employee Employee= employees.stream().filter(employee -> employee.getId() == Integer.parseInt(String.valueOf(employeeId))).findFirst().orElse(null);
-        if(Employee==null){
+        Employee Employee = employees.stream().filter(employee -> employee.getId() == Integer.parseInt(String.valueOf(employeeId))).findFirst().orElse(null);
+        if (Employee == null) {
             return null;
         }
-       employees.remove(Employee);
+        employees.remove(Employee);
         return Employee;
 
     }
