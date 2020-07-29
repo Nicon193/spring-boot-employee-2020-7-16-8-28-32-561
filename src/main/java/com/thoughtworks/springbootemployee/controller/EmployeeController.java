@@ -40,15 +40,13 @@ public class EmployeeController {
     }
 
     @PostMapping()
-    public String addEmployee(@RequestParam(name = "id", required = false) Integer id, @RequestParam(name = "name", required = false) String name,
+    public Employee addEmployee(@RequestParam(name = "id", required = false) Integer id, @RequestParam(name = "name", required = false) String name,
                             @RequestParam(name = "age", required = false) Integer age, @RequestParam(name = "gender", required = false) String gender) {
         Employee employee =new Employee(id,name,age,gender);
 
 
-        if(employees.add(employee)){
-            return "Added successfully";
-        }
-        return "Add failed";
+        employees.add(employee);
+        return employee;
     }
 
     @PutMapping(path = "/{employeeId}")
