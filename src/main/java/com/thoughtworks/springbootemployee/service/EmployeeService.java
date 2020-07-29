@@ -7,16 +7,19 @@ import java.util.List;
 
 public class EmployeeService {
 
+    private EmployeeRepository employeeRepository;
 
     public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
 
     }
 
     public Employee update(int employeeId, Employee newEmployee) {
-
-
-        return new Employee(1, "ffff", 19, "female");
-
+        Employee updateEmployee = employeeRepository.findEmployeeByID(employeeId);
+        updateEmployee.setAge(newEmployee.getAge());
+        updateEmployee.setGender(newEmployee.getGender());
+        updateEmployee.setName(newEmployee.getName());
+        return updateEmployee;
     }
 
     public List<Employee> findAll() {

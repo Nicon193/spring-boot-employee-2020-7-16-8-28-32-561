@@ -14,14 +14,13 @@ public class EmployeeServiceTest {
         //given
         EmployeeRepository mockedEmployeeRespository = mock(EmployeeRepository.class);
         EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
-        given(mockedEmployeeRespository.findEmployeeByID(1)).willReturn(new Employee(1, "ffff", 19, "female"));
+        given(mockedEmployeeRespository.findEmployeeByID(5)).willReturn(new Employee(3, "ffff", 18, "male"));
 
         //when
-        Employee updateEmployee = employeeService.update(1, new Employee(1, "test", 18, "male"));
+        Employee updateEmployee = employeeService.update(5, new Employee(2, "test", 18, "male"));
 
 
         //then
-        assertEquals(1, updateEmployee.getId());
         assertEquals("test",updateEmployee.getName());
         assertEquals(18,updateEmployee.getAge());
         assertEquals("male",updateEmployee.getGender());
