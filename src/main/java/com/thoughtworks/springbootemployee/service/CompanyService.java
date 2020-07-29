@@ -33,8 +33,8 @@ public class CompanyService {
         return  companyRespository.addCompany();
     }
 
-    public Company deleteCompany(int companyID) {
-        return companyRespository.deleteCompany(companyID);
+    public void deleteCompany(int companyID) {
+         companyRespository.deleteById(companyID);
     }
 
     public Company update(int id, Company company) {
