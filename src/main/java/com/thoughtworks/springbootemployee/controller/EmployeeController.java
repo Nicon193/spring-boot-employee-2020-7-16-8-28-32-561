@@ -13,13 +13,13 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/employees")
 public class EmployeeController {
-
+    EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
+    List<Employee> employees = EmployeesInitialization.retrunEmployees();
 
     @GetMapping()
     public List<Employee> getEmployeeList(@RequestParam(name = "page", required = false) Integer page,
                                           @RequestParam(name = "pageSize", required = false) Integer pageSize, @RequestParam(name = "gender", required = false) String gender) {
-        EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
-        List<Employee> employees = EmployeesInitialization.retrunEmployees();
+
         if (page != null && pageSize != null) {
             return employees.subList(--page, --pageSize);
         }
@@ -34,8 +34,7 @@ public class EmployeeController {
     @GetMapping(path = "/{employeeId}")
     public Employee getEmployeeByNumber(@PathVariable String employeeId) {
 
-        EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
-        List<Employee> employees = EmployeesInitialization.retrunEmployees();
+
         return employees.stream().filter(employee -> employee.getId() == Integer.parseInt(employeeId)).findFirst().orElse(null);
 
     }
@@ -45,8 +44,6 @@ public class EmployeeController {
                             @RequestParam(name = "age", required = false) Integer age, @RequestParam(name = "gender", required = false) String gender) {
         Employee employee =new Employee(id,name,age,gender);
 
-        EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
-        List<Employee> employees = EmployeesInitialization.retrunEmployees();
 
         if(employees.add(employee)){
             return "Added successfully";
@@ -57,8 +54,7 @@ public class EmployeeController {
     @PutMapping(path = "/{employeeId}")
     public String updateEmployeeById(@PathVariable Integer employeeId, @RequestParam(name = "name", required = false) String name,
                                      @RequestParam(name = "age", required = false) Integer age, @RequestParam(name = "gender", required = false) String gender) {
-        EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
-        List<Employee> employees = EmployeesInitialization.retrunEmployees();
+
         Employee Employee= employees.stream().filter(employee -> employee.getId() == Integer.parseInt(String.valueOf(employeeId))).findFirst().orElse(null);
         if(Employee==null){
             return "Update failed";
@@ -73,8 +69,7 @@ public class EmployeeController {
 
     @DeleteMapping (path = "/{employeeId}")
     public String deleteEmployeeById(@PathVariable Integer employeeId) {
-        EmployeesInitialization EmployeesInitialization = new EmployeesInitialization();
-        List<Employee> employees = EmployeesInitialization.retrunEmployees();
+
         Employee Employee= employees.stream().filter(employee -> employee.getId() == Integer.parseInt(String.valueOf(employeeId))).findFirst().orElse(null);
         if(Employee==null){
             return "Delete failed";
