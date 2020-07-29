@@ -79,4 +79,16 @@ public class CompanyController {
         return "Update failed";
     }
 
+    @DeleteMapping(path = "/{Id}")
+    public String deleteCompany(   @PathVariable int Id){
+        ConpaniesInitialization conpaniesInitialization = new ConpaniesInitialization();
+        List<Company> companies = conpaniesInitialization.returnCompanies();
+        if (Id>=0&&Id<companies.size()){
+            companies.remove(Id);
+            return "delete successfully";
+        }
+
+        return "delete failed";
+    }
+
 }
