@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface CompanyRepository extends JpaRepository<Company,Integer> {
     List<Employee> findEmployeesById(int id);
-    Company updateCompanyFindById(int id ,Company company);
 
 
 

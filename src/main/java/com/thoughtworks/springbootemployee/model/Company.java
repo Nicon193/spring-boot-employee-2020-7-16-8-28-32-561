@@ -10,11 +10,10 @@ public class Company  {
     private Integer   id;
     private String companyName;
     private String employeesNumber;
-    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY,targetEntity=Employee.class)
-    @JoinColumn(name="Employee_Id",updatable=false)
+    @OneToMany(cascade=CascadeType.ALL,mappedBy = "companyId")
     private List<Employee> employees;
 
-    public Company(int id, String companyName, String employeesNumber, List<Employee> employees) {
+    public Company(Integer id, String companyName, String employeesNumber, List<Employee> employees) {
         this.id = id;
         this.companyName = companyName;
         this.employeesNumber = employeesNumber;
@@ -51,18 +50,12 @@ public class Company  {
         this.employees = employees;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public void  updateCompany(String companyName, String employeesNumber, List<Employee> employees) {
-        setCompanyName(companyName);
-        setEmployeesNumber(employeesNumber);
-        setEmployees(employees);
-
-    }
 }

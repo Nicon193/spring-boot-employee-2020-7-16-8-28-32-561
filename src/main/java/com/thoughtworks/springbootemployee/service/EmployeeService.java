@@ -2,6 +2,7 @@ package com.thoughtworks.springbootemployee.service;
 
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
-
+    @Autowired
     private EmployeeRepository employeeRepository;
 
     public EmployeeService(EmployeeRepository employeeRepository) {
@@ -26,6 +27,7 @@ public class EmployeeService {
             updateEmployee.setName(newEmployee.getName());
 
         }
+        employeeRepository.save(updateEmployee);
         return updateEmployee;
     }
 
@@ -49,8 +51,9 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public void deleteEmployee(Employee employee) {
-
-         this.employeeRepository.delete(employee);
+    public Employee deleteEmployee(int employeeId) {
+       Employee deleteEmployee  = employeeRepository.getOne(employeeId);
+        employeeRepository.delete(deleteEmployee);
+        return deleteEmployee;
     }
 }
