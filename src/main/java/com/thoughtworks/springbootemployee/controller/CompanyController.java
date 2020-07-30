@@ -55,7 +55,7 @@ public class CompanyController {
     @PutMapping(path = "/{Id}")
     public Company updateCompanyById(
             @PathVariable int Id,
-            @RequestParam(name = "newCompany", required = false) Company newCompany
+             @RequestBody Company newCompany
 
     ) {
       return companyService.update(Id,newCompany);

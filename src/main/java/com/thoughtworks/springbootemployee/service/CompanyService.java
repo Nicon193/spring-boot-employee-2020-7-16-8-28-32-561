@@ -49,13 +49,16 @@ public class CompanyService {
     }
 
     public Company update(int id, Company company) {
-        Company updateCompany = this.companyRespository.getOne(id);
-        if(updateCompany!=null&&company!=null) {
-            updateCompany.setCompanyName(company.getCompanyName());
-            updateCompany.setEmployees(company.getEmployees());
-            updateCompany.setEmployeesNumber(company.getEmployeesNumber());
+        Company updateCompany = findCompanyByID(id);
+        if(company!=null) {
+            if (company.getCompanyName() != null)
+                updateCompany.setCompanyName(company.getCompanyName());
+            if (company.getEmployeesNumber() != null)
+                updateCompany.setEmployeesNumber(company.getEmployeesNumber());
+            if (company.getEmployees() != null)
+                updateCompany.setEmployees(company.getEmployees());
         }
-        this.companyRespository.save(updateCompany);
+        companyRespository.save(updateCompany);
         return updateCompany;
     }
 }
