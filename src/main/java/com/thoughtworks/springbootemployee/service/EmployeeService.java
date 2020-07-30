@@ -38,7 +38,7 @@ public class EmployeeService {
     }
 
     public Employee findEmployeeByID(int id) {
-        return employeeRepository.getOne(id);
+        return employeeRepository.findById(id).orElse(null);
     }
 
     public List<Employee> findEmployeeByGender(String gender) {
