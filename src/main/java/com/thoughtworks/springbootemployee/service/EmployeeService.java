@@ -18,7 +18,7 @@ public class EmployeeService {
     }
 
     public Employee updateEmployeeById(int employeeId, Employee newEmployee) {
-        Employee updateEmployee = employeeRepository.findById(employeeId).orElse(null);
+        Employee updateEmployee = employeeRepository.getOne(employeeId);
         if (updateEmployee!=null&&newEmployee!=null){
 
             updateEmployee.setAge(newEmployee.getAge());
@@ -42,7 +42,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getRangeOfEmployees(int page, int pageSize) {
-       return employeeRepository.findAll(PageRequest.of(page,pageSize)).toList();
+       return employeeRepository.findAll(PageRequest.of(page,pageSize)).getContent();
     }
 
     public Employee addEmployee(Employee employee) {
@@ -50,6 +50,7 @@ public class EmployeeService {
     }
 
     public void deleteEmployee(Employee employee) {
+
          this.employeeRepository.delete(employee);
     }
 }

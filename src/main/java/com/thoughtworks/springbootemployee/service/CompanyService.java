@@ -25,28 +25,35 @@ public class CompanyService {
     }
 
     public List<Employee> findCompanyEmployeesByID(int companyID) {
-        return companyRespository.findById(companyID).orElse(null).getEmployees();
+
+        List<Employee> employees = companyRespository.findEmployeesById(companyID);
+        return  employees;
     }
 
     public List<Company> findRangeOfCompany(int page, int pageSize) {
-        return this.companyRespository.findAll(PageRequest.of(page,pageSize)).toList();
+        return this.companyRespository.findAll(PageRequest.of(page,pageSize)).getContent();
     }
 
     public Company addCompany(Company company) {
         return  companyRespository.save(company);
     }
 
-    public void deleteCompany(int companyID) {
-         companyRespository.deleteById(companyID);
+    public Company deleteCompany(int companyID) {
+        Company company = findCompanyByID(companyID);
+        if(company!=null){
+            companyRespository.deleteById(companyID);
+        }
+        return company;
     }
 
     public Company update(int id, Company company) {
-        Company updateCompany = this.companyRespository.findById(id).orElse(null);
+        Company updateCompany = this.companyRespository.getOne(id);
         if(updateCompany!=null&&company!=null) {
             updateCompany.setCompanyName(company.getCompanyName());
             updateCompany.setEmployees(company.getEmployees());
             updateCompany.setEmployeesNumber(company.getEmployeesNumber());
         }
+        this.companyRespository.save(updateCompany);
         return updateCompany;
     }
 }

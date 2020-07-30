@@ -3,12 +3,13 @@ package com.thoughtworks.springbootemployee.service;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -18,7 +19,7 @@ public class EmployeeServiceTest {
         //given
         EmployeeRepository mockedEmployeeRespository = mock(EmployeeRepository.class);
         EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
-        given(employeeService.findEmployeeByID(5)).willReturn(new Employee(3, "ffff", 18, "male"));
+        given(mockedEmployeeRespository.getOne(5)).willReturn(new Employee(3, "ffff", 18, "male"));
 
         //when
         Employee updateEmployee = employeeService.updateEmployeeById(5, new Employee(2, "test", 18, "male"));
@@ -46,7 +47,7 @@ public class EmployeeServiceTest {
 
         //then
 
-        assertNotNull(employeeService.findAll());
+        assertEquals(employeeList.size(),employeeService.findAll().size());
     }
 
     @Test
@@ -55,7 +56,7 @@ public class EmployeeServiceTest {
         EmployeeRepository mockedEmployeeRespository = mock(EmployeeRepository.class);
         EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
         Employee employee = new Employee(3, "ffff", 18, "male");
-        given(employeeService.findEmployeeByID(3)).willReturn(employee);
+        given(mockedEmployeeRespository.getOne(3)).willReturn((employee));
 
         //when
         Employee certainEmployee = employeeService.findEmployeeByID(3);
@@ -76,7 +77,7 @@ public class EmployeeServiceTest {
         //when
         List<Employee> employees = employeeService.findEmployeeByGender("male");
         //then
-        assertNotNull(employees);
+        assertEquals(employeeList.get(0).getGender(),employees.get(0).getGender());
 
     }
 
@@ -89,7 +90,7 @@ public class EmployeeServiceTest {
         employeeList.add(new Employee(3, "ffff", 18, "male"));
         employeeList.add(new Employee(4, "ffff", 18, "male"));
         employeeList.add(new Employee(5, "ffff", 18, "male"));
-        given(employeeService.getRangeOfEmployees(3, 3)).willReturn(employeeList);
+        given(mockedEmployeeRespository.findAll(PageRequest.of(3, 3))).willReturn(new PageImpl<>(employeeList));
 
         //when
         List<Employee> employees = employeeService.getRangeOfEmployees(3, 3);
@@ -105,7 +106,7 @@ public class EmployeeServiceTest {
         EmployeeService employeeService = new EmployeeService(mockedEmployeeRespository);
         Employee employee =new Employee(3, "ffff", 18, "male");
 
-        given(employeeService.addEmployee(employee)).willReturn(employee);
+        given(mockedEmployeeRespository.save(employee)).willReturn(employee);
 
         //when
         Employee addedEmployee = employeeService.addEmployee(employee);

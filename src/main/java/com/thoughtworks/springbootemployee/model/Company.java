@@ -10,7 +10,8 @@ public class Company  {
     private Integer   id;
     private String companyName;
     private String employeesNumber;
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY,targetEntity=Employee.class)
+    @JoinColumn(name="Employee_Id",updatable=false)
     private List<Employee> employees;
 
     public Company(int id, String companyName, String employeesNumber, List<Employee> employees) {
@@ -43,6 +44,8 @@ public class Company  {
     public List<Employee> getEmployees() {
         return employees;
     }
+
+
 
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
