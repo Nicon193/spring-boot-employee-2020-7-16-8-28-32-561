@@ -20,12 +20,14 @@ public class EmployeeService {
 
     public Employee updateEmployeeById(int employeeId, Employee newEmployee) {
         Employee updateEmployee = employeeRepository.getOne(employeeId);
-        if (updateEmployee!=null&&newEmployee!=null){
+        if (newEmployee!=null){
 
-            updateEmployee.setAge(newEmployee.getAge());
-            updateEmployee.setGender(newEmployee.getGender());
-            updateEmployee.setName(newEmployee.getName());
-
+            if (newEmployee.getName() != null)
+                updateEmployee.setName(newEmployee.getName());
+            if (newEmployee.getGender() != null)
+                updateEmployee.setGender(newEmployee.getGender());
+            if (newEmployee.getAge() != null)
+                updateEmployee.setAge(newEmployee.getAge());
         }
         employeeRepository.save(updateEmployee);
         return updateEmployee;

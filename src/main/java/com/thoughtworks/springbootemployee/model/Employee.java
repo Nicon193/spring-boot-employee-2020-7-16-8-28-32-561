@@ -11,19 +11,27 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    private int age;
+    private Integer age;
     private String gender;
     private Integer companyId;
 
-    public Employee(int id, String name, int age, String gender) {
+    public Employee() {
+
+    }
+
+    public Employee(Integer id, String name, Integer age, String gender) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
     }
 
-    public Employee() {
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -34,11 +42,11 @@ public class Employee {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -48,10 +56,6 @@ public class Employee {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Integer getCompanyId() {
