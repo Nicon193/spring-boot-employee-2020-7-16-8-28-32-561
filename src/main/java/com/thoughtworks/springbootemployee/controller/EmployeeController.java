@@ -17,9 +17,11 @@ public class EmployeeController {
 
     @GetMapping()
     public List<Employee> getEmployeeList(@RequestParam(name = "page", required = false) Integer page,
-                                          @RequestParam(name = "pageSize", required = false) Integer pageSize, @RequestParam(name = "gender", required = false) String gender) {
-        if (page!=null&&pageSize!=null)
-        return employeeService.getRangeOfEmployees(page,pageSize);
+                                          @RequestParam(name = "pageSize", required = false) Integer pageSize) {
+        if (page!=null && pageSize!=null){
+            return employeeService.getRangeOfEmployees(page,pageSize);
+        }
+
         return employeeService.findAll();
     }
 

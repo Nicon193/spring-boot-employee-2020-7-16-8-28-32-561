@@ -9,12 +9,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
-import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -100,7 +98,6 @@ public class EmployeeIntegrationTest {
         employeeRepository.save(firstEmployee);
         employeeRepository.save(secondEmployee);
 
-        List<Employee> employees = employeeRepository.findAll(PageRequest.of(1, 3)).getContent();
 
         mockMvc.perform(get("/employees?page=1&pageSize=2"))
                 .andExpect(jsonPath("$.size()").value(2))

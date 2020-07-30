@@ -46,7 +46,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getRangeOfEmployees(int page, int pageSize) {
-       return employeeRepository.findAll(PageRequest.of(page,pageSize)).getContent();
+       return employeeRepository.findAll(PageRequest.of(page-1,pageSize)).getContent();
     }
 
     public Employee addEmployee(Employee employee) {
