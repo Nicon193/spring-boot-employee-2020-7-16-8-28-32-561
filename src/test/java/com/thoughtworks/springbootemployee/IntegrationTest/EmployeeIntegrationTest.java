@@ -104,4 +104,23 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("$[0].name").value("alibaba3"))
                 .andExpect(jsonPath("$[1].name").value("alibaba4"));
     }
+
+    @Test
+    void should_return_employee_list_when_hit_get_EmployeesOfGender_given_Gender() throws Exception {
+        //given
+        Employee firstEmployee = new Employee(3, "alibaba3", 20, "male");
+        Employee secondEmployee = new Employee(4, "alibaba4", 21, "male");
+        Employee thirdEmployee = new Employee(4, "alibaba5", 21, "female");
+        employeeRepository.save(firstEmployee);
+        employeeRepository.save(secondEmployee);
+        employeeRepository.save(thirdEmployee);
+
+
+        mockMvc.perform(get("/employees?gender=male"))
+                .andExpect(jsonPath("$.size()").value(2))
+                .andExpect(jsonPath("$[0].name").value("alibaba3"))
+                .andExpect(jsonPath("$[1].name").value("alibaba4"));
+    }
+
+
 }
