@@ -127,4 +127,23 @@ public class CompanyIntegrationTest {
                 .andExpect(jsonPath("$.companyName").value(alibaba.getCompanyName()));
     }
 
+    @Test
+    void should_update_company_when_hit_push_companies_id_given_companyId_newNompany() throws Exception {
+        //given
+
+        Company alibaba = new Company(1, "alibaba", "1", Collections.emptyList());
+        Company savedAlibaba = companyRepository.save(alibaba);
+        String NewCompanyJson ="{   \n" +
+                "    \"id\":1,\n" +
+                "    \"companyName\":\"tencent\",\n" +
+                "    \"employeesNumber\" : \"0\"\n" +
+                "\n" +
+                "}";
+        //then
+        mockMvc.perform(put("/companies/" +savedAlibaba.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(NewCompanyJson))
+                .andExpect(jsonPath("$.companyName").value("tencent"));
+    }
+
 }
