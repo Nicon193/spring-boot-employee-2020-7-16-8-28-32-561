@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
@@ -93,6 +95,23 @@ public class CompanyIntegrationTest {
         mockMvc.perform(get("/companies/" +savedAlibaba.getId()+"/employees"))
                 .andExpect(jsonPath("$.size()").value(1))
                 .andExpect(jsonPath("$[0].name").value("alibaba1"));
+    }
+
+    @Test
+    void add_return_company_when_hit_post_companies_given_company() throws Exception {
+        //given
+        String companyJson ="{   \n" +
+                "    \"id\":5,\n" +
+                "    \"companyName\":\"alibaba\",\n" +
+                "    \"employeesNumber\" : \"0\"\n" +
+                "\n" +
+                "}";
+        //then
+        mockMvc.perform(post("/companies/" )
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(companyJson))
+                .andExpect(jsonPath("$.employeesNumber").value(0))
+                .andExpect(jsonPath("$.companyName").value("alibaba"));
     }
 
 
