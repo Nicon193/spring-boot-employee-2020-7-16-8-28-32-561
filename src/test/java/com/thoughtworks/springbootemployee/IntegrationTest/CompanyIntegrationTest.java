@@ -16,8 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
@@ -114,5 +113,18 @@ public class CompanyIntegrationTest {
                 .andExpect(jsonPath("$.companyName").value("alibaba"));
     }
 
+    @Test
+    void should_delete_company_when_hit_delete_companies_id_given_companyId() throws Exception {
+        //given
+        Company alibaba = new Company(1, "alibaba", "1", Collections.emptyList());
+        Company tencent = new Company(2, "tencent", "1", Collections.emptyList());
+        Company savedAlibaba = companyRepository.save(alibaba);
+        companyRepository.save(tencent);
+
+
+        mockMvc.perform(delete("/companies/" +savedAlibaba.getId()))
+                .andExpect(jsonPath("$.id").value(savedAlibaba.getId()))
+                .andExpect(jsonPath("$.companyName").value(alibaba.getCompanyName()));
+    }
 
 }
