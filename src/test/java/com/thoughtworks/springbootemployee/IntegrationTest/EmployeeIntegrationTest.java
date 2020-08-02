@@ -14,8 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Collections;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @SpringBootTest
@@ -122,5 +121,42 @@ public class EmployeeIntegrationTest {
                 .andExpect(jsonPath("$[1].name").value("alibaba4"));
     }
 
+    @Test
+    void should_return_employee_when_hit_get_EmployeesOfGender_given_Gender() throws Exception {
+        //given
+        Employee firstEmployee = new Employee(3, "alibaba3", 20, "male");
+        Employee secondEmployee = new Employee(4, "alibaba4", 21, "male");
+        Employee thirdEmployee = new Employee(4, "alibaba5", 21, "female");
+        employeeRepository.save(firstEmployee);
+        employeeRepository.save(secondEmployee);
+        employeeRepository.save(thirdEmployee);
+
+
+        mockMvc.perform(get("/employees?gender=male"))
+                .andExpect(jsonPath("$.size()").value(2))
+                .andExpect(jsonPath("$[0].name").value("alibaba3"))
+                .andExpect(jsonPath("$[1].name").value("alibaba4"));
+    }
+
+    @Test
+    void should_return_newEmployee_when_hit_post_employee_id_given_id_employee() throws Exception {
+        //given
+        Employee firstEmployee = new Employee(3, "alibaba3", 20, "male");
+        Employee employee = employeeRepository.save(firstEmployee);
+
+        String employeeJson = "{\n" +
+                "    \"id\": 3, \n" +
+                "    \"name\": \"Xiaoxia\", \n" +
+                "    \"age\": 15, \n" +
+                "    \"gender\": \"Female\"\n" +
+                "}";
+
+        mockMvc.perform(put("/employees/" + employee.getId())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(employeeJson))
+                .andExpect(jsonPath("$.name").value("Xiaoxia"))
+                .andExpect(jsonPath("$.age").value(15))
+                .andExpect(jsonPath("$.gender").value("Female"));
+    }
 
 }

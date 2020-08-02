@@ -19,9 +19,8 @@ public class EmployeeService {
     }
 
     public Employee updateEmployeeById(int employeeId, Employee newEmployee) {
-        Employee updateEmployee = employeeRepository.getOne(employeeId);
+        Employee updateEmployee = employeeRepository.findById(employeeId).orElse(null);
         if (newEmployee!=null){
-
             if (newEmployee.getName() != null)
                 updateEmployee.setName(newEmployee.getName());
             if (newEmployee.getGender() != null)
@@ -29,8 +28,8 @@ public class EmployeeService {
             if (newEmployee.getAge() != null)
                 updateEmployee.setAge(newEmployee.getAge());
         }
-        employeeRepository.save(updateEmployee);
-        return updateEmployee;
+
+        return employeeRepository.save(updateEmployee);
     }
 
     public List<Employee> findAll() {
