@@ -1,5 +1,7 @@
 package com.thoughtworks.springbootemployee.service;
 
+import com.thoughtworks.springbootemployee.exception.ErrorOperationException;
+import com.thoughtworks.springbootemployee.exception.NoSuchDataException;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,10 @@ public class EmployeeService {
 
     public Employee updateEmployeeById(int employeeId, Employee newEmployee) {
         Employee updateEmployee = employeeRepository.findById(employeeId).orElse(null);
-        if (newEmployee!=null){
+        if (updateEmployee == null) {
+            throw new ErrorOperationException();
+        }
+        if (newEmployee != null) {
             if (newEmployee.getName() != null)
                 updateEmployee.setName(newEmployee.getName());
             if (newEmployee.getGender() != null)
@@ -37,6 +42,7 @@ public class EmployeeService {
     }
 
     public Employee findEmployeeByID(int id) {
+
         return employeeRepository.findById(id).orElse(null);
     }
 
@@ -45,7 +51,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getRangeOfEmployees(int page, int pageSize) {
-       return employeeRepository.findAll(PageRequest.of(page-1,pageSize)).getContent();
+        return employeeRepository.findAll(PageRequest.of(page > 0 ? page - 1 : 0, pageSize)).getContent();
     }
 
     public Employee addEmployee(Employee employee) {
@@ -53,7 +59,10 @@ public class EmployeeService {
     }
 
     public Employee deleteEmployee(int employeeId) {
-       Employee deleteEmployee  = employeeRepository.getOne(employeeId);
+        Employee deleteEmployee = employeeRepository.findById(employeeId).orElse(null);
+        if (deleteEmployee==null){
+            throw new NoSuchDataException();
+        }
         employeeRepository.delete(deleteEmployee);
         return deleteEmployee;
     }
