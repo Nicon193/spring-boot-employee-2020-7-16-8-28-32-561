@@ -1,5 +1,7 @@
 package com.thoughtworks.springbootemployee.service;
 
+import com.thoughtworks.springbootemployee.exception.ErrorOperationException;
+import com.thoughtworks.springbootemployee.exception.NoSuchDataException;
 import com.thoughtworks.springbootemployee.model.Company;
 import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
@@ -23,17 +25,25 @@ public class CompanyService {
     }
 
     public Company findCompanyByID(int id) {
-        return this.companyRespository.findById(id).orElse(null);
+        Company company=this.companyRespository.findById(id).orElse(null);
+        if(company==null){
+            throw new NoSuchDataException();
+        }
+
+        return company;
     }
 
     public List<Employee> findCompanyEmployeesByID(int companyID) {
 
         List<Employee> employees = companyRespository.findEmployeesById(companyID);
+        if(employees==null){
+            throw new NoSuchDataException();
+        }
         return  employees;
     }
 
     public List<Company> findRangeOfCompany(int page, int pageSize) {
-        return this.companyRespository.findAll(PageRequest.of(page,pageSize)).getContent();
+        return this.companyRespository.findAll(PageRequest.of(page>0?page-1:0,pageSize)).getContent();
     }
 
     public Company addCompany(Company company) {
@@ -42,14 +52,18 @@ public class CompanyService {
 
     public Company deleteCompany(int companyID) {
         Company company = findCompanyByID(companyID);
-        if(company!=null){
-            companyRespository.deleteById(companyID);
+        if(company==null){
+            throw new ErrorOperationException();
         }
+        companyRespository.deleteById(companyID);
         return company;
     }
 
     public Company update(int id, Company company) {
         Company updateCompany = findCompanyByID(id);
+        if(updateCompany==null){
+            throw new NoSuchDataException();
+        }
         if(company!=null) {
             if (company.getCompanyName() != null)
                 updateCompany.setCompanyName(company.getCompanyName());
