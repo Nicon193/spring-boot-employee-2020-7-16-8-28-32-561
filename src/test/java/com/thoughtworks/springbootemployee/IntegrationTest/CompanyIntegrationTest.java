@@ -48,5 +48,18 @@ public class CompanyIntegrationTest {
                 .andExpect(jsonPath("$[1].companyName").value(tencent.getCompanyName()));
     }
 
+    @Test
+    void should_return_company_when_hit_get_companies_id_given_companyId() throws Exception {
+        //given
+        Company alibaba = new Company(1, "alibaba", "1", Collections.emptyList());
+        Company tencent = new Company(2, "tencent", "1", Collections.emptyList());
+        Company savedAlibaba = companyRepository.save(alibaba);
+        companyRepository.save(tencent);
+
+
+        mockMvc.perform(get("/companies/" +savedAlibaba.getId()))
+                .andExpect(jsonPath("$.id").value(savedAlibaba.getId()))
+                .andExpect(jsonPath("$.companyName").value(alibaba.getCompanyName()));
+    }
 
 }
