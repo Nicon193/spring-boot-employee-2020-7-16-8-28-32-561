@@ -62,4 +62,19 @@ public class CompanyIntegrationTest {
                 .andExpect(jsonPath("$.companyName").value(alibaba.getCompanyName()));
     }
 
+    @Test
+    void should_return_companies_when_hit_get_CompanyPagination_given_page_pageSize() throws Exception {
+        //given
+        Company alibaba = new Company(1, "alibaba", "1", Collections.emptyList());
+        Company tencent = new Company(2, "tencent", "1", Collections.emptyList());
+        companyRepository.save(alibaba);
+        companyRepository.save(tencent);
+
+
+        mockMvc.perform(get("/companies?page=1&pageSize=2"))
+                .andExpect(jsonPath("$.size()").value(2))
+                .andExpect(jsonPath("$[0].companyName").value(alibaba.getCompanyName()))
+                .andExpect(jsonPath("$[1].companyName").value(tencent.getCompanyName()));
+    }
+
 }
