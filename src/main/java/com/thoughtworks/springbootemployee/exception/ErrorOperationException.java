@@ -1,4 +1,4 @@
 package com.thoughtworks.springbootemployee.exception;
 
-public class ErrorOperationException {
+public class ErrorOperationException extends RuntimeException {
 }
