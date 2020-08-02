@@ -1,6 +1,7 @@
 package com.thoughtworks.springbootemployee.IntegrationTest;
 
 import com.thoughtworks.springbootemployee.model.Company;
+import com.thoughtworks.springbootemployee.model.Employee;
 import com.thoughtworks.springbootemployee.repository.CompanyRepository;
 import com.thoughtworks.springbootemployee.repository.EmployeeRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -10,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -76,5 +79,21 @@ public class CompanyIntegrationTest {
                 .andExpect(jsonPath("$[0].companyName").value(alibaba.getCompanyName()))
                 .andExpect(jsonPath("$[1].companyName").value(tencent.getCompanyName()));
     }
+
+    @Test
+    void should_return_employees_when_hit_get_companies_id_employees_given_companyId() throws Exception {
+        //given
+        Employee employee = new Employee(3, "alibaba1", 20, "male",1);
+        Company alibaba = new Company(1, "alibaba", "1", new ArrayList<>(Arrays.asList(employee)));
+        Company tencent = new Company(2, "tencent", "1", Collections.emptyList());
+        Company savedAlibaba = companyRepository.save(alibaba);
+        companyRepository.save(tencent);
+
+
+        mockMvc.perform(get("/companies/" +savedAlibaba.getId()+"/employees"))
+                .andExpect(jsonPath("$.size()").value(1))
+                .andExpect(jsonPath("$[0].name").value("alibaba1"));
+    }
+
 
 }

@@ -20,13 +20,13 @@ public class CompanyService {
         this.companyRespository = companyRespository;
     }
 
-    public List<Company> findAll(){
-        return  companyRespository.findAll();
+    public List<Company> findAll() {
+        return companyRespository.findAll();
     }
 
     public Company findCompanyByID(int id) {
-        Company company=this.companyRespository.findById(id).orElse(null);
-        if(company==null){
+        Company company = this.companyRespository.findById(id).orElse(null);
+        if (company == null) {
             throw new NoSuchDataException();
         }
 
@@ -35,24 +35,28 @@ public class CompanyService {
 
     public List<Employee> findCompanyEmployeesByID(int companyID) {
 
-        List<Employee> employees = companyRespository.findEmployeesById(companyID);
-        if(employees==null){
+        Company company = companyRespository.findById(companyID).orElse(null);
+        if (company == null) {
             throw new NoSuchDataException();
         }
-        return  employees;
+        List<Employee> employees = company.getEmployees();
+        if (employees == null) {
+            throw new NoSuchDataException();
+        }
+        return employees;
     }
 
     public List<Company> findRangeOfCompany(int page, int pageSize) {
-        return this.companyRespository.findAll(PageRequest.of(page>0?page-1:0,pageSize)).getContent();
+        return this.companyRespository.findAll(PageRequest.of(page > 0 ? page - 1 : 0, pageSize)).getContent();
     }
 
     public Company addCompany(Company company) {
-        return  companyRespository.save(company);
+        return companyRespository.save(company);
     }
 
     public Company deleteCompany(int companyID) {
         Company company = findCompanyByID(companyID);
-        if(company==null){
+        if (company == null) {
             throw new ErrorOperationException();
         }
         companyRespository.deleteById(companyID);
@@ -61,10 +65,10 @@ public class CompanyService {
 
     public Company update(int id, Company company) {
         Company updateCompany = findCompanyByID(id);
-        if(updateCompany==null){
+        if (updateCompany == null) {
             throw new NoSuchDataException();
         }
-        if(company!=null) {
+        if (company != null) {
             if (company.getCompanyName() != null)
                 updateCompany.setCompanyName(company.getCompanyName());
             if (company.getEmployeesNumber() != null)
