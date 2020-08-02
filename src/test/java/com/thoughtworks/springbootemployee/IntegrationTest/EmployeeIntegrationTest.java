@@ -149,8 +149,6 @@ public class EmployeeIntegrationTest {
         Employee firstEmployee = new Employee(3, "alibaba3", 20, "male");
         Employee savedEmployee = employeeRepository.save(firstEmployee);
 
-
-
         mockMvc.perform(delete("/employees/" + savedEmployee.getId()))
                 .andExpect(jsonPath("$.id").value(savedEmployee.getId()))
                 .andExpect(jsonPath("$.name").value("alibaba3"));
