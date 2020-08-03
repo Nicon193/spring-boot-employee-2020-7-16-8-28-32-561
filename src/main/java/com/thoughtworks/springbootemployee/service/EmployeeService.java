@@ -15,6 +15,7 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+
     public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
 
@@ -22,6 +23,7 @@ public class EmployeeService {
 
     public Employee updateEmployeeById(int employeeId, Employee newEmployee) {
         Employee updateEmployee = employeeRepository.findById(employeeId).orElse(null);
+
         if (updateEmployee == null) {
             throw new ErrorOperationException();
         }
@@ -34,11 +36,15 @@ public class EmployeeService {
                 updateEmployee.setAge(newEmployee.getAge());
         }
 
-        return employeeRepository.save(updateEmployee);
+
+        return    employeeRepository.save(updateEmployee);
     }
 
     public List<Employee> findAll() {
-        return employeeRepository.findAll();
+        List<Employee> employees=employeeRepository.findAll();
+
+
+        return employees;
     }
 
     public Employee findEmployeeByID(int id) {

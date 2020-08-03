@@ -12,8 +12,18 @@ public class CompanyDTO {
     private Integer employeesNumber;
     List<Employee> employees;
 
+
     public CompanyDTO() {
     }
+
+    public CompanyDTO(Integer id, String companyName, Integer employeesNumber, List<Employee> employees) {
+        this.id = id;
+        this.companyName = companyName;
+        this.employeesNumber = employeesNumber;
+        this.employees = employees;
+    }
+
+
 
     public Integer getId() {
         return id;

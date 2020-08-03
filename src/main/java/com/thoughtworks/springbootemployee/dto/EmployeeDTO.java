@@ -6,19 +6,28 @@ public class EmployeeDTO {
     private String name;
     private Integer age;
     private String gender;
-
-    public Integer getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
-    }
-
     private Integer companyId;
+
 
     public EmployeeDTO() {
     }
+
+    public EmployeeDTO(Integer id, String name, Integer age, String gender) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+
+    public EmployeeDTO(Integer id, String name, Integer age, String gender, Integer companyId) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.companyId = companyId;
+    }
+
+
 
     public Integer getId() {
         return id;
@@ -51,4 +60,13 @@ public class EmployeeDTO {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
 }

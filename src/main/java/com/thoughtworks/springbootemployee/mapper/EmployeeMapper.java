@@ -6,6 +6,8 @@ import com.thoughtworks.springbootemployee.model.Employee;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class EmployeeMapper {
 
@@ -20,4 +22,14 @@ public class EmployeeMapper {
         BeanUtils.copyProperties(employeeDTO,employee);
         return employee;
     }
+
+
+    public List<EmployeeDTO> switchEntityListToDtoList(List<Employee>employees,List<EmployeeDTO>employeeDTOList){
+        for (Employee employee: employees
+             ) {
+            employeeDTOList.add(switchEntityToDto(employee));
+        }
+        return employeeDTOList;
+    }
+
 }
